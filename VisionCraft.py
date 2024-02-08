@@ -45,7 +45,7 @@ class vision:
         - path (str): The path to the image file (optional).
         """
         if path:
-            self.img = cv2.imread(path,cv2.COLOR_BGR2GRAY)
+            self.img = cv2.imread(path,0)
         else:
             print("No Path for Image has been Passed")
         print("OpenCV Version: ",cv2.__version__)
