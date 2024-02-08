@@ -1,9 +1,8 @@
 <p align="center">
-  <img src="./logo.png" alt="VisionCraft Logo" width="200"/>
+  <img src="./logo.png" alt="VisionCraft Logo" width="700"/>
 </p>
 
 
-# VisionCraft
 
 VisionCraft is a simple computer vision utility class using OpenCV, Matplotlib, and NumPy. It provides a set of methods for common computer vision tasks such as image visualization, transformation, and analysis.
 
