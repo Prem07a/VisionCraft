@@ -37,13 +37,15 @@ class vision:
     - imgLog():
         Display the original and logarithmically transformed image.
     """
-    def __init__(self, path: str = None) -> None:
+    def __init__(self, path: str = None, height=10, width=8) -> None:
         """
         Initialize the vision class.
 
         Parameters:
         - path (str): The path to the image file (optional).
         """
+        self.h = height 
+        self.w = width
         if path:
             self.img = cv2.imread(path,0)
         else:
@@ -81,7 +83,7 @@ class vision:
                 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
                 plt.title(title)
                 plt.axis('off')
-                plt.show()
+                plt.show()         
         except:
             if subplot:
                 plt.subplot(row, col, num)
@@ -107,6 +109,7 @@ class vision:
         """
         Display the original and logarithmically transformed image.
         """
+        plt.figure(figsize=(self.h,self.w))
         c = 255 / np.log(1 + np.max(np.array(self.img)))
         img_log = c * np.log(1 + np.array(self.img))    
         self.imshow("Original Image",self.img, subplot=True, row=1, col=2, num=1)
@@ -114,7 +117,7 @@ class vision:
         plt.show()
 
     def plotLogTransform(self):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         img_range = range(256)
         c = 255 / np.log(1 + np.max(np.array(img_range)))
         img_log = c * np.log(1 + np.array(img_range))
@@ -130,7 +133,7 @@ class vision:
         plt.show()
         
     def powerLaw(self):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         gammas = [0.04, 0.1, 0.2, 0.4, 0.67, 1 , 1.5, 2.5, 5, 10, 25]
         img_no = 1
         for gamma in gammas:
@@ -143,7 +146,7 @@ class vision:
         plt.show()
 
     def plotPowerLaw(self):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         img_range = np.arange(256)
         gammas = [0.04, 0.1, 0.2, 0.4, 0.67, 1, 1.5, 2.5, 5, 10, 25]
 
@@ -160,7 +163,7 @@ class vision:
         plt.show()
 
     def flipImg(self):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         self.imshow("Original Image",self.img, subplot=True, row=1, col=3, num=1)           
         img_flip_v = cv2.flip(self.img, 0)
         self.imshow("Vertical Flip",img_flip_v, subplot=True, row=1, col=3, num=2)
@@ -169,7 +172,7 @@ class vision:
         plt.show()
         
     def grayLevelSlicing(self, lower:int=100, upper:int=200, bg:bool=False, THRESHOLD = 256):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         rows, cols = self.img.shape
         img = np.copy(self.img)
         for row in range(rows):
@@ -189,7 +192,7 @@ class vision:
         plt.show()
     
     def bitPlaneSlicing(self):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         for bit in range(8):
             img = np.copy(self.img)
             rows, cols = img.shape
@@ -201,7 +204,7 @@ class vision:
         plt.show()
         
     def contrastStretching(self, s1=30, s2 = 150, r1=80, r2=150, L=255):
-        plt.figure(figsize=(15,12))
+        plt.figure(figsize=(self.h,self.w))
         img = np.copy(self.img)
         self.imshow("Original Image", img, subplot=True, row = 2, col = 2, num=1)
         plt.subplot(2,2,3)
@@ -228,6 +231,5 @@ class vision:
         plt.title("Contrasted Histogram")
         plt.hist(img.ravel(),256,[0,256])
         plt.show()
-            
-
-
+        
+    
