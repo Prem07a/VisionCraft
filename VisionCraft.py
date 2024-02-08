@@ -6,6 +6,7 @@
 import cv2
 import matplotlib
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -232,4 +233,50 @@ class vision:
         plt.hist(img.ravel(),256,[0,256])
         plt.show()
         
-    
+    def histogramEquilization(self):
+        plt.figure(figsize=(self.h,self.w))\
+            
+        self.imshow("Original Image", self.img, subplot=True, row=2, col=2, num=1)
+        img = np.copy(self.img)
+        freq = {}
+        for row in range(img.shape[0]):
+            for col in range(img.shape[1]):
+                r = img[row][col]
+                if r in freq:
+                    freq[r] += 1
+                else:
+                    freq[r] = 1
+        for i in range(256):
+            if i not in freq:
+                freq[i] = 0
+        plt.subplot(2,2,2)
+        plt.bar(freq.keys(), freq.values())
+        plt.title("Original Histogram")
+        plt.xlabel("Gray Level")
+        plt.ylabel("Frequency")
+
+        data = {
+            "GrayLevel":list(freq.keys()),
+            "Nk":list(freq.values())
+        }
+        df = pd.DataFrame(data)
+        df = df.sort_values(by="GrayLevel")
+        df.reset_index(inplace=True, drop=True)
+        df["PDF"] = df["Nk"]/(img.shape[0]*img.shape[1])
+        df["CDF"] = df["PDF"].cumsum()
+        df["Sk"] = df["CDF"]*255
+        df["New_Histogram"] = df["Sk"].apply(lambda x:round(x))
+        plt.subplot(2,2,4)
+        grouped_df = df[['New_Histogram', 'Nk']].groupby('New_Histogram').sum().reset_index()
+        plt.bar(grouped_df['New_Histogram'], grouped_df['Nk'])
+        plt.title("Equalized Histogram")
+        plt.xlabel("New Gray Level")
+        plt.ylabel("Frequency")
+        freq = {}
+        for row in range(img.shape[0]):
+            for col in range(img.shape[1]):
+                r = img[row][col]
+                img[row][col] = df.loc[r,"New_Histogram"]
+        self.imshow("Histogram Equilization", img, row=2, col=2, num=3, subplot=True)
+        plt.show()
+
