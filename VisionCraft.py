@@ -10,7 +10,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-class vision:
+class Vision:
     """
     A simple computer vision utility class using OpenCV, Matplotlib, and NumPy.
 
