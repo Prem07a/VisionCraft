@@ -148,4 +148,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 We invite and appreciate your active engagement in the VisionCraft community. Your feedback, suggestions, and contributions are invaluable as we strive to deliver a robust and comprehensive release. Share your experiences, insights, and bug reports to actively contribute to the evolution of VisionCraft.
 
-**Thank you for being part of the VisionCraft journey!**
+**Thank you for choosing VisionCraft!**
