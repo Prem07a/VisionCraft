@@ -234,7 +234,7 @@ class vision:
         plt.show()
         
     def histogramEquilization(self):
-        plt.figure(figsize=(self.h,self.w))\
+        plt.figure(figsize=(self.h,self.w))
             
         self.imshow("Original Image", self.img, subplot=True, row=2, col=2, num=1)
         img = np.copy(self.img)
