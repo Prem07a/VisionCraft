@@ -82,7 +82,7 @@ class vision:
                 plt.title(title)
                 plt.axis('off')
                 plt.show()
-        except cv2.error as e:
+        except:
             if subplot:
                 plt.subplot(row, col, num)
                 plt.imshow(image, cmap='gray')
