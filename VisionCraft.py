@@ -71,16 +71,28 @@ class vision:
         """
         if given:
             image = self.img
-        if subplot:
-            plt.subplot(row, col, num)
-            plt.imshow(image, cmap="gray")
-            plt.title(title)
-            plt.axis('off')
-        else:
-            plt.imshow(image, cmap="gray")
-            plt.title(title)
-            plt.axis('off')
-            plt.show()
+        try:
+            if subplot:
+                plt.subplot(row, col, num)
+                plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+                plt.title(title)
+                plt.axis('off')
+            else:
+                plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+                plt.title(title)
+                plt.axis('off')
+                plt.show()
+        except cv2.error as e:
+            if subplot:
+                plt.subplot(row, col, num)
+                plt.imshow(image, cmap='gray')
+                plt.title(title)
+                plt.axis('off')
+            else:
+                plt.imshow(image, cmap='gray')
+                plt.title(title)
+                plt.axis('off')
+                plt.show()
             
     def imgNegative(self):
         """
@@ -191,7 +203,7 @@ class vision:
     def contrastStretching(self, s1=30, s2 = 150, r1=80, r2=150, L=255):
         plt.figure(figsize=(15,12))
         img = np.copy(self.img)
-        self.imshow("Original Image", self.img, subplot=True, row = 2, col = 2, num=1)
+        self.imshow("Original Image", img, subplot=True, row = 2, col = 2, num=1)
         plt.subplot(2,2,3)
         plt.title("Original Histogram")
         plt.hist(self.img.ravel(), 256, [0,256])
@@ -205,7 +217,7 @@ class vision:
             for col in range(cols):
                 if img[row][col] <= r1:
                     img[row][col] = a*img[row][col]
-                elif img[row][col] >r1 and img[row][col] <=r2:
+                elif r1 < img[row][col] <= r2:
                     r = img[row][col]
                     img[row][col] = b*(r-r1) + s1
                 else:
@@ -217,4 +229,5 @@ class vision:
         plt.hist(img.ravel(),256,[0,256])
         plt.show()
             
-    
+
+
