@@ -16,17 +16,22 @@ class vision:
 
     Parameters:
     - path (str): The path to the image file (optional).
+    - height (int): Height for figure size in Matplotlib (default: 10).
+    - width (int): Width for figure size in Matplotlib (default: 8).
 
     Attributes:
     - img (numpy.ndarray): The image loaded using OpenCV.
+    - h (int): Height for figure size in Matplotlib.
+    - w (int): Width for figure size in Matplotlib.
 
     Methods:
-    - imshow(title="", image=None, subplot=False, row=0, col=0, num=0):
+    - imshow(title="", image=None, given=False, subplot=False, row=0, col=0, num=0):
         Display an image using Matplotlib.
 
         Parameters:
         - title (str): Title of the displayed image.
         - image (numpy.ndarray): The image data.
+        - given (bool): If True, use the class attribute 'img' as the image data.
         - subplot (bool): Whether to use subplot (default: False).
         - row (int): Number of rows in the subplot grid (if subplot is True).
         - col (int): Number of columns in the subplot grid (if subplot is True).
@@ -37,13 +42,39 @@ class vision:
 
     - imgLog():
         Display the original and logarithmically transformed image.
+
+    - plotLogTransform():
+        Plot the logarithmic transformation and its inverse.
+
+    - powerLaw():
+        Display the original image and its power-law transformations.
+
+    - plotPowerLaw():
+        Plot power-law transformations with different gamma values.
+
+    - flipImg():
+        Display the original image, vertical flip, and horizontal flip.
+
+    - grayLevelSlicing(lower=100, upper=200, bg=False, THRESHOLD=256):
+        Display the original image and grayscale level slicing.
+
+    - bitPlaneSlicing():
+        Display bit-plane sliced images.
+
+    - contrastStretching(s1=30, s2=150, r1=80, r2=150, L=255):
+        Display the original image and its contrast-stretched version.
+
+    - histogramEquilization():
+        Display the original image, its histogram, and the equalized histogram.
     """
     def __init__(self, path: str = None, height=10, width=8) -> None:
         """
-        Initialize the vision class.
+        Initialize the Vision class.
 
         Parameters:
         - path (str): The path to the image file (optional).
+        - height (int): Height for figure size in Matplotlib (default: 10).
+        - width (int): Width for figure size in Matplotlib (default: 8).
         """
         self.h = height 
         self.w = width
@@ -67,6 +98,7 @@ class vision:
         Parameters:
         - title (str): Title of the displayed image.
         - image (numpy.ndarray): The image data.
+        - given (bool): If True, use the class attribute 'img' as the image data.
         - subplot (bool): Whether to use subplot (default: False).
         - row (int): Number of rows in the subplot grid (if subplot is True).
         - col (int): Number of columns in the subplot grid (if subplot is True).
@@ -118,6 +150,9 @@ class vision:
         plt.show()
 
     def plotLogTransform(self):
+        """
+        Plot the logarithmic transformation and its inverse graph.
+        """
         plt.figure(figsize=(self.h,self.w))
         img_range = range(256)
         c = 255 / np.log(1 + np.max(np.array(img_range)))
@@ -134,6 +169,9 @@ class vision:
         plt.show()
         
     def powerLaw(self):
+        """
+        Display the original image and its power-law transformations.
+        """
         plt.figure(figsize=(self.h,self.w))
         gammas = [0.04, 0.1, 0.2, 0.4, 0.67, 1 , 1.5, 2.5, 5, 10, 25]
         img_no = 1
@@ -147,6 +185,9 @@ class vision:
         plt.show()
 
     def plotPowerLaw(self):
+        """
+        Plot power-law transformations graph with different gamma values.
+        """
         plt.figure(figsize=(self.h,self.w))
         img_range = np.arange(256)
         gammas = [0.04, 0.1, 0.2, 0.4, 0.67, 1, 1.5, 2.5, 5, 10, 25]
@@ -164,6 +205,9 @@ class vision:
         plt.show()
 
     def flipImg(self):
+        """
+        Display the original image, vertical flip, and horizontal flip.
+        """        
         plt.figure(figsize=(self.h,self.w))
         self.imshow("Original Image",self.img, subplot=True, row=1, col=3, num=1)           
         img_flip_v = cv2.flip(self.img, 0)
@@ -173,6 +217,15 @@ class vision:
         plt.show()
         
     def grayLevelSlicing(self, lower:int=100, upper:int=200, bg:bool=False, THRESHOLD = 256):
+        """
+        Display the original image and grayscale level slicing.
+
+        Parameters:
+        - lower (int): Lower bound for slicing.
+        - upper (int): Upper bound for slicing.
+        - bg (bool): If True, include the background in the sliced image.
+        - THRESHOLD (int): Value to replace with.
+        """
         plt.figure(figsize=(self.h,self.w))
         rows, cols = self.img.shape
         img = np.copy(self.img)
@@ -193,6 +246,9 @@ class vision:
         plt.show()
     
     def bitPlaneSlicing(self):
+        """
+        Display bit-plane sliced images.
+        """
         plt.figure(figsize=(self.h,self.w))
         for bit in range(8):
             img = np.copy(self.img)
@@ -205,6 +261,16 @@ class vision:
         plt.show()
         
     def contrastStretching(self, s1=30, s2 = 150, r1=80, r2=150, L=255):
+        """
+        Display the original image and its contrast-stretched version.
+
+        Parameters:
+        - s1 (int): Stretch value for region 1.
+        - s2 (int): Stretch value for region 2.
+        - r1 (int): Pixel value for region 1.
+        - r2 (int): Pixel value for region 2.
+        - L (int): Maximum pixel value.
+        """
         plt.figure(figsize=(self.h,self.w))
         img = np.copy(self.img)
         self.imshow("Original Image", img, subplot=True, row = 2, col = 2, num=1)
@@ -234,6 +300,9 @@ class vision:
         plt.show()
         
     def histogramEquilization(self):
+        """
+        Display the original image, its histogram, and the equalized histogram.
+        """
         plt.figure(figsize=(self.h,self.w))
             
         self.imshow("Original Image", self.img, subplot=True, row=2, col=2, num=1)
