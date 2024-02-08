@@ -177,7 +177,7 @@ class vision:
         plt.show()
     
     def bitPlaneSlicing(self):
-        plt.figure(figsize=(15,8))
+        plt.figure(figsize=(15,12))
         for bit in range(8):
             img = np.copy(self.img)
             rows, cols = img.shape
@@ -189,7 +189,7 @@ class vision:
         plt.show()
         
     def contrastStretching(self, s1=30, s2 = 150, r1=80, r2=150, L=255):
-        plt.figure(figsize=(12,6))
+        plt.figure(figsize=(15,12))
         img = np.copy(self.img)
         self.imshow("Original Image", self.img, subplot=True, row = 2, col = 2, num=1)
         plt.subplot(2,2,3)
