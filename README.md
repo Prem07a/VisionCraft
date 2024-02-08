@@ -134,3 +134,18 @@ help(Vision)
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+## VisionCraft Development Note:
+
+**Note:**
+
+- This version of VisionCraft is currently in its early stages of development and is subject to ongoing changes. Regular updates, new methods, and bug fixes will be consistently released to enhance its capabilities.
+
+- The introduction of the `Craft` class, a powerful feature for neural network construction, is anticipated shortly and will further elevate the toolkit's functionality.
+
+**Your Contribution Matters:**
+
+We invite and appreciate your active engagement in the VisionCraft community. Your feedback, suggestions, and contributions are invaluable as we strive to deliver a robust and comprehensive release. Share your experiences, insights, and bug reports to actively contribute to the evolution of VisionCraft.
+
+**Thank you for being part of the VisionCraft journey!**
