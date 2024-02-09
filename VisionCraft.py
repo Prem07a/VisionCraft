@@ -349,3 +349,17 @@ class Vision:
         self.imshow("Histogram Equilization", img, row=2, col=2, num=3, subplot=True)
         plt.show()
 
+    def boxFilter(self, filter_size):
+        if filter_size % 2 == 0:
+            print("Please Try using Odd Numbers for filter_size to get good results")
+        plt.figure(figsize=(self.h,self.w))
+        rows, cols = self.img.shape
+        self.imshow("Original Image",self.img, subplot=True, row=2,col=1, num=1)
+        img1 = np.pad(self.img, pad_width=int(np.ceil(filter_size/2)), mode='constant', constant_values=0)
+        filtered_img = np.zeros_like(self.img)
+        for row in range(rows):
+            for col in range(cols):
+                replace = np.floor(np.sum(img1[row:row+filter_size, col:col+filter_size])/(filter_size*filter_size))
+                filtered_img[row,col]=  replace
+        self.imshow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        plt.show()
