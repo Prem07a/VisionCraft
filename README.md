@@ -272,7 +272,7 @@ This module (`utils.py`) provides utility functions for displaying images and pl
 
 - **Regular Updates:** Expect regular updates, new methods, and bug fixes to be consistently released to enhance the library's capabilities. We are committed to improving and expanding VisionCraft to meet the evolving needs of the image processing community.
 
-- **Upcoming Feature: `Craft` Class:** The introduction of the `Craft` class is anticipated shortly. This powerful feature will provide advanced capabilities for neural network construction, expanding the toolkit's functionality and opening up new possibilities for image processing tasks.
+- **Upcoming Feature: `Craft`:** The introduction of the `Craft` is anticipated shortly. This powerful feature will provide advanced capabilities for neural network construction, expanding the toolkit's functionality and opening up new possibilities for image processing tasks.
 
 We appreciate your interest in VisionCraft and invite you to stay tuned for exciting developments!
 
