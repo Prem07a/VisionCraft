@@ -14,7 +14,7 @@ from VisionCraft.vision.filter import boxFilter
 
 import numpy as np
 import cv2
-from vision.utils import imshow
+from VisionCraft.vision.utils import imshow
 import matplotlib.pyplot as plt
 
 def boxFilter(img:np.ndarray = None, 

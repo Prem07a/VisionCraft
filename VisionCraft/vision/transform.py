@@ -17,7 +17,7 @@ result = grayLevelSlicing(img=my_image_array, lower=100, upper=200, show=True)
 import cv2
 import numpy as np
 import pandas as pd
-from vision.utils import imshow
+from VisionCraft.vision.utils import imshow
 import matplotlib.pyplot as plt
 
 def grayLevelSlicing(img : np.ndarray = None, 

@@ -13,7 +13,7 @@ from VisionCraft.vision.processing import imgNegative
 
 import cv2
 import numpy as np
-from vision.utils import imshow
+from VisionCraft.vision.utils import imshow
 import matplotlib.pyplot as plt
 from typing import Tuple
 
