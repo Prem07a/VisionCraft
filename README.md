@@ -299,7 +299,8 @@ We appreciate your interest in VisionCraft and invite you to stay tuned for exci
 
 ## Author
 
-- PREM GAIKWAD 
+<img src="https://i.ibb.co/GWDGXJM/Prem-Ganesh-Gaikwad-1.png" alt="Prem-Ganesh-Gaikwad-1" border="0" style="width: 30%; height: auto;">
+
 
 ## License
 
