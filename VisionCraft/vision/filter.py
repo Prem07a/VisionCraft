@@ -1,7 +1,7 @@
 """
 filter.py - Module for image filtering operations.
 
-This module provides functions for image filtering operations, such as box filtering.
+This module provides functions for image filtering operations.
 
 Author: Prem Gaikwad
 Date: Feb 2024
