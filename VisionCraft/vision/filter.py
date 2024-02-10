@@ -53,7 +53,7 @@ def boxFilter(img:np.ndarray = None,
     
     rows, cols = img.shape
     
-    img1 = np.pad(img, pad_width=int(np.ceil(filter_size/2)), mode='constant', constant_values=0)
+    img1 = np.pad(img, pad_width=int(np.ceil(filter_size/2)), mode='constant', constant_values=255)
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
@@ -66,3 +66,98 @@ def boxFilter(img:np.ndarray = None,
         plt.show()  
         
     return filtered_img
+
+def weightedAvgFilter(img:np.ndarray = None, 
+                      path: str = "", 
+                      show:bool = False, 
+                      height:int = 10, 
+                      width:int = 8) -> np.ndarray:  
+    """
+    Apply a 3x3 weighted average filter to the input image.
+
+    Parameters:
+    - image (np.ndarray): Input image (grayscale).
+    - image_path (str): Path to the input image file (if 'image' is not provided).
+    - show_result (bool): If True, display the original and filtered images.
+    - figure_height (int): Height of the Matplotlib figure (if 'show_result' is True).
+    - figure_width (int): Width of the Matplotlib figure (if 'show_result' is True).
+
+    Returns:
+    - np.ndarray: Filtered image.
+
+    If 'image' is not provided and 'image_path' is specified, it loads the image from the path.
+    The weighted average filter is applied to the image using a 3x3 filter kernel.
+    If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
+    """
+    if path!="":
+        img = cv2.imread(path, 0)
+        if img is None:
+            print("\n\n404: Image not found at given path\n\n")
+            return
+    filter = np.array([[1,2,1],[2,4,2],[1,2,1]])
+    
+    rows, cols = img.shape
+    
+    img1 = np.pad(img, pad_width=1, mode='constant', constant_values=255)
+    filtered_img = np.zeros_like(img)
+    for row in range(rows):
+        for col in range(cols):
+            replace = np.sum(img1[row:row+3, col:col+3] * filter)/16
+            filtered_img[row,col]=  replace
+    if show:
+        plt.figure(figsize=(height, width))
+        imshow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imshow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        plt.show()  
+        
+    return filtered_img
+    
+def medianFilter(img:np.ndarray = None, 
+                 path: str = "", 
+                 filter_size : int = 3,
+                 show:bool = False, 
+                 height:int = 10, 
+                 width:int = 8) -> np.ndarray:  
+    """
+    Apply a median filter to the input image.
+
+    Parameters:
+    - img (np.ndarray): Input image (grayscale).
+    - path (str): Path to the input image file (if 'img' is not provided).
+    - filter_size (int): Size of the median filter (odd number recommended).
+    - show_result (bool): If True, display the original and filtered images.
+    - height (int): Height of the Matplotlib figure (if 'show_result' is True).
+    - width (int): Width of the Matplotlib figure (if 'show_result' is True).
+
+    Returns:
+    - np.ndarray: Filtered image.
+
+    If 'img' is not provided and 'path' is specified, it loads the image from the path.
+    The median filter is applied to the image using a square neighborhood of size 'filter_size'.
+    If 'filter_size' is even, a message is printed recommending odd numbers for better results.
+    If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
+    """
+    if path!="":
+        img = cv2.imread(path, 0)
+        if img is None:
+            print("\n\n404: Image not found at given path\n\n")
+            return
+    if filter_size % 2 == 0:
+        print("Please Try using Odd Numbers for filter_size to get good results")
+    
+    rows, cols = img.shape
+    
+    img1 = np.pad(img, pad_width=int(np.ceil(filter_size/2)), mode='constant', constant_values=255)
+    filtered_img = np.zeros_like(img)
+    for row in range(rows):
+        for col in range(cols):
+            replace = np.median(img1[row:row+filter_size, col:col+filter_size])
+            filtered_img[row,col]=  replace
+    if show:
+        plt.figure(figsize=(height, width))
+        imshow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imshow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        plt.show()  
+        
+    return filtered_img
+    

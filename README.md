@@ -118,6 +118,27 @@ This module (`filter.py`) focuses on various image filtering operations. Image f
     - `width`: Width of the displayed images (for visualization).
   - Returns: Filtered image as a NumPy array.
 
+- **`weightedAvgFilter`**
+  - *Description*: Applies a 3x3 weighted average filter to the input image, offering a balanced smoothing effect.
+  - *Parameters*:
+    - `img` (np.ndarray): Input image as a NumPy array.
+    - `path` (str): Path to an image file. Either `img` or `path` should be provided.
+    - `show` (bool): Boolean indicating whether to display the original and filtered images.
+    - `height` (int): Height of the displayed images (for visualization).
+    - `width` (int): Width of the displayed images (for visualization).
+  - *Returns*: np.ndarray - Filtered image.
+
+- **`medianFilter`**
+  - *Description*: Applies a median filter to the input image, effectively reducing noise and preserving edges.
+  - *Parameters*:
+    - `img` (np.ndarray): Input image as a NumPy array.
+    - `path` (str): Path to an image file. Either `img` or `path` should be provided.
+    - `filter_size` (int): Size of the median filter (odd number recommended).
+    - `show` (bool): Boolean indicating whether to display the original and filtered images.
+    - `height` (int): Height of the displayed images (for visualization).
+    - `width` (int): Width of the displayed images (for visualization).
+  - *Returns*: np.ndarray - Filtered image.
+
 ### 2. `processing.py`
 
 **Module for Image Processing Operations**
