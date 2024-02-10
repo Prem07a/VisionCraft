@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./logo.png" alt="VisionCraft Logo" width="700"/>
+  <img src="./VC_logo.png" alt="VisionCraft Logo" width="700"/>
 </p>
 
 
