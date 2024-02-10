@@ -11,6 +11,7 @@ Date: Feb 2024
 import cv2
 import numpy as np
 import pandas as pd
+from typing import Union, Tuple
 from VisionCraft.vision.utils import imshow
 import matplotlib.pyplot as plt
 
@@ -184,7 +185,7 @@ def histogramEquilization(img : np = None,
                           show : bool = False, 
                           height : int = 10, 
                           width : int = 8, 
-                          eq_table : bool = False) -> np.ndarray:
+                          eq_table : bool = False) -> Union[np.ndarray, Tuple[pd.DataFrame, np.ndarray]]:
     """
     Performs histogram equalization on the input image.
 
