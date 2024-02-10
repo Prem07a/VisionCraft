@@ -5,10 +5,6 @@ This module provides functions for image filtering operations, such as box filte
 
 Author: Prem Gaikwad
 Date: Feb 2024
-
-Usage:
-from VisionCraft.vision.filter import boxFilter
-
 """
 
 

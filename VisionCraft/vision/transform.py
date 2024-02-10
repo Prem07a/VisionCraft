@@ -5,12 +5,6 @@ This module provides functions for image transformations, including gray level s
 
 Author: Prem Gaikwad
 Date: Feb 2024
-
-Usage:
-from VisionCraft.vision.transform import grayLevelSlicing
-
-# Example: Applying gray level slicing to an image
-result = grayLevelSlicing(img=my_image_array, lower=100, upper=200, show=True)
 """
 
 

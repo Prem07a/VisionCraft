@@ -16,7 +16,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 def imshow(title: str = "", 
            image: np.ndarray = None, 
            path: str = "",

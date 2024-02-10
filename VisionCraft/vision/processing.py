@@ -6,9 +6,6 @@ This module provides functions for various image processing operations, such as 
 Author: Prem Gaikwad
 Date: Feb 2024
 
-Usage:
-from VisionCraft.vision.processing import imgNegative
-
 """
 
 import cv2
