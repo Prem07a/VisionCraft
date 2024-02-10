@@ -13,10 +13,10 @@ VisionCraft is a Python library designed for image processing, providing a colle
 - [Installation](#installation)
 - [Usage](#usage)
 - [vision/](#vision)
-   - [filter.py](#filter.py)
-   - [processing.py](#processing.py)
-   - [transform.py](#transform.py)
-   - [utils.py](#utils.py)
+   - [filter.py](#filterpy)
+   - [processing.py](#processingpy)
+   - [transform.py](#transformpy)
+   - [utils.py](#utilspy)
 - [craft/](#craft)
 - [Project Status and Future Development](#project-status-and-future-development)
 - [Author](#author)
@@ -99,7 +99,7 @@ from VisionCraft.vision.utils import imshow
 
 ## `vision/`
 
-### 1. `filter`
+### 1. `filter.py`
 
 **Module for Image Filtering Operations**
 
