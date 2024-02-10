@@ -15,6 +15,7 @@ import cv2
 import numpy as np
 from vision.utils import imshow
 import matplotlib.pyplot as plt
+from typing import Tuple
 
 def imgNegative(img : np.ndarray = None, 
                 path : str = "",
@@ -132,7 +133,7 @@ def flipImg(img : np.ndarray = None,
             path : bool = False, 
             show : bool = False,
             height : int = 10, 
-            width : int = 8) -> np.ndarray:
+            width : int = 8) -> Tuple[np.ndarray, np.ndarray]:
     """
     Flips the input image vertically and horizontally.
 
@@ -156,8 +157,8 @@ def flipImg(img : np.ndarray = None,
         if img is None:
             print("\n\n404: Image not found at given path\n\n")
             return
-    img_flip_v = cv2.flip(img, 0)
-    img_flip_h = cv2.flip(img, 1)
+    img_flip_v = img[::-1]
+    img_flip_h = np.array([row[::-1] for row in img])
     if show:
         plt.figure(figsize=(height, width))
         imshow("Original Image",img, subplot=True, row=1, col=3, num=1)           

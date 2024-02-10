@@ -186,7 +186,7 @@ This module (`processing.py`) encompasses various image processing operations. I
     - `show` (bool): Boolean indicating whether to display the original and flipped images.
     - `height` (int): Height of the displayed images (for visualization).
     - `width` (int): Width of the displayed images (for visualization).
-  - *Returns*: Tuple containing horizontally and vertically flipped images as NumPy arrays.
+  - *Returns*: Tuple[np.ndarray, np.ndarray] -> Tuple containing horizontally and vertically flipped images as NumPy arrays.
 
 
 ### 3. `transform.py`
