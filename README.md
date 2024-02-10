@@ -13,10 +13,10 @@ VisionCraft is a Python library designed for image processing, providing a colle
 - [Installation](#installation)
 - [Usage](#usage)
 - [vision/](#vision)
-   - [filter](#filterpy)
-   - [processing](#processingpy)
-   - [transform](#transformpy)
-   - [utils](#utilspy)
+   - [filter.py](#filter.py)
+   - [processing.py](#processing.py)
+   - [transform.py](#transform.py)
+   - [utils.py](#utils.py)
 - [craft/](#craft)
 - [Project Status and Future Development](#project-status-and-future-development)
 - [Author](#author)
@@ -139,7 +139,7 @@ This module (`filter.py`) focuses on various image filtering operations. Image f
     - `width` (int): Width of the displayed images (for visualization).
   - *Returns*: np.ndarray - Filtered image.
 
-### 2. `processing`
+### 2. `processing.py`
 
 **Module for Image Processing Operations**
 
@@ -189,7 +189,7 @@ This module (`processing.py`) encompasses various image processing operations. I
   - *Returns*: Tuple[np.ndarray, np.ndarray] -> Tuple containing horizontally and vertically flipped images as NumPy arrays.
 
 
-### 3. `transform`
+### 3. `transform.py`
 
 **Module for Image Transformation Operations**
 
@@ -247,7 +247,7 @@ This module (`transform.py`) provides functions for image transformations, inclu
     - `eq_table` (bool): If True, returns the equalization table along with the equalized image.
   - *Returns*: The equalized image as a NumPy array. If `eq_table` is True, returns the equalization table as well.
 
-### 4. `utils`
+### 4. `utils.py`
 
 **Module for Utility Functions Related to Image Processing**
 
