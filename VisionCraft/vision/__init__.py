@@ -17,15 +17,15 @@ Directory Structure:
 Usage:
 import VisionCraft
 
-# Example: Importing filter functions
+> Example: Importing filter functions
 from VisionCraft.vision.filter import boxFilter
 
-# Example: Importing processing functions
+> Example: Importing processing functions
 from VisionCraft.vision.processing import imgNegative
 
-# Example: Importing transform functions
+> Example: Importing transform functions
 from VisionCraft.vision.transform import grayLevelSlicing
 
-# Example: Importing utility functions
+> Example: Importing utility functions
 from VisionCraft.vision.utils import imshow
 """
