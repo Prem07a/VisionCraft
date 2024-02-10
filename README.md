@@ -59,7 +59,7 @@ git clone https://github.com/Prem07a/VisionCraft.git
    python -m venv env
    ```
    This command creates a virtual environment named `env`.
-   
+
 2. **Activate the Virtual Environment (Optional, Depending on OS):**
    - **On Windows:**
      ```bash
@@ -284,20 +284,3 @@ We appreciate your interest in VisionCraft and invite you to stay tuned for exci
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-<<<<<<< HEAD
-=======
-
-## VisionCraft Development Note:
-
-**Note:**
-
-- This version of VisionCraft is currently in its early stages of development and is subject to ongoing changes. Regular updates, new methods, and bug fixes will be consistently released to enhance its capabilities.
-
-- The introduction of the `Craft` class, a powerful feature for neural network construction, is anticipated shortly and will further elevate the toolkit's functionality.
-
-**Your Contribution Matters:**
-
-We invite and appreciate your active engagement in the VisionCraft community. Your feedback, suggestions, and contributions are invaluable as we strive to deliver a robust and comprehensive release. Share your experiences, insights, and bug reports to actively contribute to the evolution of VisionCraft.
-
-**Thank you for choosing VisionCraft!**
->>>>>>> ed7ad035f6e26133fcb242fafdc8083c4b0e2df0
