@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="./VC_logo.png" alt="VisionCraft Logo" width="700"/>
+  <img src="https://i.ibb.co/xMjMKpC/VC-logo.png" alt="VisionCraft Logo" width="700"/>
+  
 </p>
 
 
