@@ -43,9 +43,10 @@ def imShow(title: str = "",
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
 
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
         
     try:
         if subplot:
@@ -70,7 +71,7 @@ def imShow(title: str = "",
             plt.axis('off')
             plt.show()
 
-def imgRead(path : str,
+def imRead(path : str,
             show : bool = False,
             BGR : bool = False) -> Union[np.ndarray,None]:
     """

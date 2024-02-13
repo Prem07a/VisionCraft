@@ -9,16 +9,16 @@ Date: Feb 2024
 """
 
 import numpy as np
-from typing import Tuple
+from typing import Tuple, Union
 import matplotlib.pyplot as plt
-from VisionCraft.vision.utils import imShow, imgRead
+from VisionCraft.vision.utils import imShow, imRead
 
 
 def imgNegative(img : np.ndarray = None, 
                 path : str = "",
                 show : bool = False,
                 height : int = 10, 
-                width : int = 8) -> np.ndarray:
+                width : int = 8) -> Union[np.ndarray,None]:
     """
     Creates the negative of an input image.
 
@@ -37,9 +37,11 @@ def imgNegative(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     img_negative = 255 - img
     if show:
         plt.figure(figsize=(height, width))
@@ -53,7 +55,7 @@ def imgLog(img : np.ndarray = None,
            path : str = "", 
            show : bool = False,
            height : int = 10, 
-           width : int = 8) -> np.ndarray:
+           width : int = 8) -> Union[np.ndarray,None]:
     """
     Applies a logarithmic transformation to the input image.
 
@@ -72,9 +74,11 @@ def imgLog(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     c = 255 / np.log(1 + np.max(np.array(img)))
     img_log = c * np.log(1 + np.array(img))    
     if show:
@@ -89,7 +93,7 @@ def powerLaw(img : np.ndarray = None,
              height : int = 10, 
              width : int = 8, 
              show : bool = False, 
-             gamma : float = 1.0) -> np.ndarray:
+             gamma : float = 1.0) -> Union[np.ndarray,None]:
     """
     Applies a power-law transformation to the input image.
 
@@ -109,9 +113,11 @@ def powerLaw(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     plt.figure(figsize=(height, width))
     img_pl = 255*(img/255)**gamma
     if show:
@@ -124,7 +130,7 @@ def flipImg(img : np.ndarray = None,
             path : bool = False, 
             show : bool = False,
             height : int = 10, 
-            width : int = 8) -> Tuple[np.ndarray, np.ndarray]:
+            width : int = 8) -> Union[None, Tuple[np.ndarray, np.ndarray] ]:
     """
     Flips the input image vertically and horizontally.
 
@@ -143,9 +149,11 @@ def flipImg(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     img_flip_v = img[::-1]
     img_flip_h = np.array([row[::-1] for row in img])
     if show:

@@ -9,15 +9,16 @@ Date: Feb 2024
 
 
 import numpy as np
+from typing import Union
 import matplotlib.pyplot as plt
-from VisionCraft.vision.utils import imShow, imgRead
+from VisionCraft.vision.utils import imShow, imRead
 
 def boxFilter(img:np.ndarray = None, 
               path: str = "", 
               filter_size:int = 3, 
               show:bool = False, 
               height:int = 10, 
-              width:int = 8) -> np.ndarray:
+              width:int = 8) -> Union[np.ndarray,None]:
     """
     Applies a box filter to the input image.
 
@@ -38,9 +39,11 @@ def boxFilter(img:np.ndarray = None,
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     - If 'filter_size' is an even number, a message is printed, recommending the use of odd numbers.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     if filter_size % 2 == 0:
         print("Please Try using Odd Numbers for filter_size to get good results")
     
@@ -64,7 +67,7 @@ def weightedAvgFilter(img:np.ndarray = None,
                       path: str = "", 
                       show:bool = False, 
                       height:int = 10, 
-                      width:int = 8) -> np.ndarray:  
+                      width:int = 8) -> Union[np.ndarray,None]:  
     """
     Apply a 3x3 weighted average filter to the input image.
 
@@ -82,9 +85,11 @@ def weightedAvgFilter(img:np.ndarray = None,
     The weighted average filter is applied to the image using a 3x3 filter kernel.
     If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     filter = np.array([[1,2,1],[2,4,2],[1,2,1]])
     
     rows, cols = img.shape
@@ -108,7 +113,7 @@ def medianFilter(img:np.ndarray = None,
                  filter_size : int = 3,
                  show:bool = False, 
                  height:int = 10, 
-                 width:int = 8) -> np.ndarray:  
+                 width:int = 8) -> Union[np.ndarray,None]:  
     """
     Apply a median filter to the input image.
 
@@ -128,9 +133,11 @@ def medianFilter(img:np.ndarray = None,
     If 'filter_size' is even, a message is printed recommending odd numbers for better results.
     If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
     """
-    img = imgRead(path)
-    if img is None:
-        return img
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     if filter_size % 2 == 0:
         print("Please Try using Odd Numbers for filter_size to get good results")
     

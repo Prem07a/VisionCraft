@@ -7,12 +7,10 @@ Author: Prem Gaikwad
 Date: Feb 2024
 """
 
-
-import cv2
 import numpy as np
 import pandas as pd
 from typing import Union, Tuple
-from VisionCraft.vision.utils import imshow
+from VisionCraft.vision.utils import imShow, imRead
 import matplotlib.pyplot as plt
 
 def grayLevelSlicing(img : np.ndarray = None, 
@@ -24,7 +22,7 @@ def grayLevelSlicing(img : np.ndarray = None,
                      show : bool = False, 
                      height : int = 10, 
                      width : int = 8,
-                     ) -> np.ndarray:
+                     ) -> Union[np.ndarray,None]:
     """
     Performs gray level slicing on the input image.
 
@@ -45,11 +43,10 @@ def grayLevelSlicing(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
         
     plt.figure(figsize=(height, width))
     rows, cols = img.shape
@@ -64,11 +61,11 @@ def grayLevelSlicing(img : np.ndarray = None,
                 else:
                     img1[row][col] = 0
     if show:
-        imshow("Original Image", img, subplot=True, row=1, col=2, num=1)
+        imShow("Original Image", img, subplot=True, row=1, col=2, num=1)
         if bg:
-            imshow("Grey Level Slicing With BG", img, subplot=True, row=1, col=2, num=2)
+            imShow("Grey Level Slicing With BG", img, subplot=True, row=1, col=2, num=2)
         else:
-            imshow("Grey Level Slicing Without BG", img1, subplot=True, row=1, col=2, num=2)
+            imShow("Grey Level Slicing Without BG", img1, subplot=True, row=1, col=2, num=2)
         plt.show()
     return img1
 
@@ -76,7 +73,7 @@ def bitPlaneSlicing(img : np.ndarray = None,
                     path : str = "", 
                     show : bool = False,
                     height : int = 10, 
-                    width : int = 8) -> np.ndarray:
+                    width : int = 8) -> Union[np.ndarray,None]:
     """
     Performs bit-plane slicing on the input image.
 
@@ -93,11 +90,11 @@ def bitPlaneSlicing(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     planes = []
     for bit in range(8):
         img1 = np.copy(img)
@@ -108,7 +105,7 @@ def bitPlaneSlicing(img : np.ndarray = None,
                 img1[row][col] = 255 if ("0"*(8-len(binary)) + binary)[::-1][bit] == "1" else 0
         if show:
             plt.figure(figsize=(height, width))
-            imshow(f"Bit Plane {bit}", img1, subplot=True, row = 2, col = 4, num=bit+1)
+            imShow(f"Bit Plane {bit}", img1, subplot=True, row = 2, col = 4, num=bit+1)
         planes.append(img1)
     if show:
         plt.show()
@@ -124,7 +121,7 @@ def contrastStretching(img : np.ndarray = None,
                        L : int = 256,
                        show : bool = False,
                        height : int = 10, 
-                       width : int = 8) -> np.ndarray:
+                       width : int = 8) -> Union[np.ndarray,None]:
     """
     Performs contrast stretching on the input image.
 
@@ -146,11 +143,11 @@ def contrastStretching(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    if image is None:
+        image = imRead(path)
+        if image is None:
+            return image
+        
     img1 = np.copy(img)
     a = s1/r1
     b = (s2-s1)/(r2-r1)
@@ -169,11 +166,11 @@ def contrastStretching(img : np.ndarray = None,
                 img1[row][col] = g*(r-r2) + s2
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image", img, subplot=True, row = 2, col = 2, num=1)
+        imShow("Original Image", img, subplot=True, row = 2, col = 2, num=1)
         plt.subplot(2,2,3)
         plt.title("Original Histogram")
         plt.hist(img.ravel(), 256, [0,256])
-        imshow("Contrast Stretching Image", img1, subplot=True, row = 2, col = 2, num=2)
+        imShow("Contrast Stretching Image", img1, subplot=True, row = 2, col = 2, num=2)
         plt.subplot(2,2,4)
         plt.title("Contrasted Histogram")
         plt.hist(img1.ravel(),256,[0,256])
@@ -185,7 +182,7 @@ def histogramEquilization(img : np = None,
                           show : bool = False, 
                           height : int = 10, 
                           width : int = 8, 
-                          eq_table : bool = False) -> Union[np.ndarray, Tuple[pd.DataFrame, np.ndarray]]:
+                          eq_table : bool = False) -> Union[np.ndarray, None, Tuple[pd.DataFrame, np.ndarray]]:
     """
     Performs histogram equalization on the input image.
 
@@ -203,11 +200,12 @@ def histogramEquilization(img : np = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
+    
+    if img is None:
+        img = imRead(path)
         if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+            return img
+        
     img1 = np.copy(img)
     freq = {}
     for row in range(img.shape[0]):
@@ -240,7 +238,7 @@ def histogramEquilization(img : np = None,
     
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image", img, subplot=True, row=2, col=2, num=1)
+        imShow("Original Image", img, subplot=True, row=2, col=2, num=1)
         plt.subplot(2,2,2)
         plt.bar(freq.keys(), freq.values())
         plt.title("Original Histogram")
@@ -251,7 +249,7 @@ def histogramEquilization(img : np = None,
         plt.title("Equalized Histogram")
         plt.xlabel("New Gray Level")
         plt.ylabel("Frequency")
-        imshow("Histogram Equalization", img1, row=2, col=2, num=3, subplot=True)
+        imShow("Histogram Equalization", img1, row=2, col=2, num=3, subplot=True)
         plt.show()
     if eq_table:
         return df, img1
