@@ -27,5 +27,5 @@ from VisionCraft.vision.processing import imgNegative
 from VisionCraft.vision.transform import grayLevelSlicing
 
 > Example: Importing utility functions
-from VisionCraft.vision.utils import imshow
+from VisionCraft.vision.utils import imShow
 """

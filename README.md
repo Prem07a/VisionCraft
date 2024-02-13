@@ -255,7 +255,7 @@ This module (`utils.py`) provides utility functions for displaying images and pl
 
 #### Functions:
 
-- **`imshow`**
+- **`imShow`**
   - *Description*: Display an image using Matplotlib.
   - *Parameters*:
     - `title` (str, optional): Title of the displayed image.
