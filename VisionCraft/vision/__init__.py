@@ -29,3 +29,5 @@ from VisionCraft.vision.transform import grayLevelSlicing
 > Example: Importing utility functions
 from VisionCraft.vision.utils import imShow
 """
+
+from VisionCraft.vision import *
