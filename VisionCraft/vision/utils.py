@@ -14,9 +14,10 @@ from VisionCraft.vision.utils import imshow
 
 import cv2
 import numpy as np
+from typing import Union
 import matplotlib.pyplot as plt
 
-def imshow(title: str = "", 
+def imShow(title: str = "", 
            image: np.ndarray = None, 
            path: str = "",
            subplot: bool = False, 
@@ -42,11 +43,9 @@ def imshow(title: str = "",
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
 
-    if path!="":
-        image = cv2.imread(path, 0)
-        if image == None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
         
     try:
         if subplot:
@@ -70,6 +69,32 @@ def imshow(title: str = "",
             plt.title(title)
             plt.axis('off')
             plt.show()
+
+def imgRead(path : str,
+            show : bool = False,
+            BGR : bool = False) -> Union[np.ndarray,None]:
+    """
+    Reads an image from the specified path.
+
+    Parameters:
+    - path (str): The path to the image file.
+    - show (bool): If True, displays the image using the `imShow` function.
+                   Default is False.
+    - BGR (bool): If True, reads the image in BGR format. If False, reads in
+                  grayscale format. Default is False.
+
+    Returns:
+    - img (numpy.ndarray or None): The image read from the specified path.
+                                   Returns None if the image is not found.
+
+    """
+    img = cv2.imread(path, int(BGR))   
+    if img == None:
+        print("No Image found at given Location")
+        return None
+    if show:
+        imShow(title=path.split('/')[-1], image=img)
+    return img  
 
 def plotLogTransform(height : int = 10, 
                      width : int = 8) -> None:

@@ -9,9 +9,8 @@ Date: Feb 2024
 
 
 import numpy as np
-import cv2
-from VisionCraft.vision.utils import imshow
 import matplotlib.pyplot as plt
+from VisionCraft.vision.utils import imShow, imgRead
 
 def boxFilter(img:np.ndarray = None, 
               path: str = "", 
@@ -39,11 +38,9 @@ def boxFilter(img:np.ndarray = None,
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     - If 'filter_size' is an even number, a message is printed, recommending the use of odd numbers.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     if filter_size % 2 == 0:
         print("Please Try using Odd Numbers for filter_size to get good results")
     
@@ -57,8 +54,8 @@ def boxFilter(img:np.ndarray = None,
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imshow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imShow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
         plt.show()  
         
     return filtered_img
@@ -85,11 +82,9 @@ def weightedAvgFilter(img:np.ndarray = None,
     The weighted average filter is applied to the image using a 3x3 filter kernel.
     If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     filter = np.array([[1,2,1],[2,4,2],[1,2,1]])
     
     rows, cols = img.shape
@@ -102,8 +97,8 @@ def weightedAvgFilter(img:np.ndarray = None,
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imshow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imShow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
         plt.show()  
         
     return filtered_img
@@ -133,11 +128,9 @@ def medianFilter(img:np.ndarray = None,
     If 'filter_size' is even, a message is printed recommending odd numbers for better results.
     If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     if filter_size % 2 == 0:
         print("Please Try using Odd Numbers for filter_size to get good results")
     
@@ -151,8 +144,8 @@ def medianFilter(img:np.ndarray = None,
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imshow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imShow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
         plt.show()  
         
     return filtered_img
