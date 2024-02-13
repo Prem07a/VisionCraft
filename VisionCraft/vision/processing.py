@@ -8,11 +8,11 @@ Date: Feb 2024
 
 """
 
-import cv2
 import numpy as np
-from VisionCraft.vision.utils import imshow
-import matplotlib.pyplot as plt
 from typing import Tuple
+import matplotlib.pyplot as plt
+from VisionCraft.vision.utils import imShow, imgRead
+
 
 def imgNegative(img : np.ndarray = None, 
                 path : str = "",
@@ -37,16 +37,14 @@ def imgNegative(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     img_negative = 255 - img
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image", img, subplot=True, row=1, col=2, num=1)
-        imshow("Image Negation",img_negative, subplot=True, row=1, col=2, num=2)
+        imShow("Original Image", img, subplot=True, row=1, col=2, num=1)
+        imShow("Image Negation",img_negative, subplot=True, row=1, col=2, num=2)
         plt.show()   
     return img_negative
     
@@ -74,17 +72,15 @@ def imgLog(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     c = 255 / np.log(1 + np.max(np.array(img)))
     img_log = c * np.log(1 + np.array(img))    
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image",img, subplot=True, row=1, col=2, num=1)
-        imshow("Logarithmic Transformation",img_log, subplot=True, row=1, col=2, num=2)
+        imShow("Original Image",img, subplot=True, row=1, col=2, num=1)
+        imShow("Logarithmic Transformation",img_log, subplot=True, row=1, col=2, num=2)
         plt.show()
     return img_log
         
@@ -113,16 +109,14 @@ def powerLaw(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     plt.figure(figsize=(height, width))
     img_pl = 255*(img/255)**gamma
     if show:
-        imshow("Original Image",img, subplot=True, row=1, col=2, num=1)
-        imshow(f"Gamma {gamma}",img_pl, subplot=True, row=1, col=2, num=2)
+        imShow("Original Image",img, subplot=True, row=1, col=2, num=1)
+        imShow(f"Gamma {gamma}",img_pl, subplot=True, row=1, col=2, num=2)
         plt.show()
     return img_pl
 
@@ -149,18 +143,16 @@ def flipImg(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if path!="":
-        img = cv2.imread(path, 0)
-        if img is None:
-            print("\n\n404: Image not found at given path\n\n")
-            return
+    img = imgRead(path)
+    if img is None:
+        return img
     img_flip_v = img[::-1]
     img_flip_h = np.array([row[::-1] for row in img])
     if show:
         plt.figure(figsize=(height, width))
-        imshow("Original Image",img, subplot=True, row=1, col=3, num=1)           
-        imshow("Vertical Flip",img_flip_v, subplot=True, row=1, col=3, num=2)
-        imshow("Horizontal Flip",img_flip_h, subplot=True, row=1, col=3, num=3)
+        imShow("Original Image",img, subplot=True, row=1, col=3, num=1)           
+        imShow("Vertical Flip",img_flip_v, subplot=True, row=1, col=3, num=2)
+        imShow("Horizontal Flip",img_flip_h, subplot=True, row=1, col=3, num=3)
         plt.show()
     return img_flip_h, img_flip_v
         
