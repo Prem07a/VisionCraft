@@ -268,6 +268,38 @@ This module (`utils.py`) provides utility functions for displaying images and pl
   - *Returns*: None
   - *Note*: If 'path' is provided but the image is not found, a message is printed, and None is returned.
 
+- **`imRead`**
+  - *Description*: Reads an image from the specified path.
+  - *Parameters*:
+    - `path` (str): The path to the image file.
+    - `show` (bool): If True, displays the image using the `imShow` function. Default is False.
+    - `BGR` (bool): If True, reads the image in BGR format. If False, reads in grayscale format. Default is False.
+  - *Returns*: `img` (numpy.ndarray or None): The image read from the specified path. Returns None if the image is not found.
+  - *Note*: If 'path' is provided but the image is not found, a message is printed, and None is returned.
+
+- **`imgResize`**
+  - *Description*: Resize the input image array or read an image from the specified path and resize it.
+  - *Parameters*:
+    - `img` (numpy.ndarray, optional): The input image array. If not provided, the function will attempt to read an image from the specified 'path'.
+    - `path` (str, optional): The path to the image file. If 'img' is provided, this parameter is ignored.
+    - `width` (int): The new width of the image.
+    - `height` (int): The new height of the image.
+  - *Returns*: `img` (numpy.ndarray or None): The resized image array. Returns None if the image is not found or cannot be read and resized.
+
+- **`imgRotate`**
+  - *Description*: Rotate the input image array or read an image from the specified path and rotate it by 90-degree increments.
+  - *Parameters*:
+    - `img` (numpy.ndarray, optional): The input image array. If not provided, the function will attempt to read an image from the specified 'path'.
+    - `path` (str, optional): The path to the image file. If 'img' is provided, this parameter is ignored.
+    - `deg90_turn` (int): The number of 90-degree turns to rotate the image.
+  - *Returns*: `img` (numpy.ndarray or None): The rotated image array. Returns None if the image is not found or cannot be read and rotated.
+
+- **`imgAdd`**
+  - *Description*: Add multiple images element-wise.
+  - *Parameters*:
+    - `*images` (numpy.ndarray): Variable-length positional arguments representing the images to be added. Each image should be a NumPy array of the same shape.
+  - *Returns*: `add_img` (numpy.ndarray): The resulting image obtained by element-wise addition of all input images.
+
 - **`plotLogTransform`**
   - *Description*: Visualize logarithmic transformations and their inverses.
   - *Parameters*:
