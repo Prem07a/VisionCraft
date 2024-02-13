@@ -97,6 +97,75 @@ def imRead(path : str,
         imShow(title=path.split('/')[-1], image=img)
     return img  
 
+def imgResize(img : np.ndarray,
+           path : str,
+           width : int,
+           height : int) -> Union[None, np.ndarray]:
+    """
+    Resize the input image array or read an image from the specified path and resize it.
+
+    Parameters:
+    - img (numpy.ndarray, optional): The input image array. If not provided, the function will attempt to read
+      an image from the specified 'path'.
+    - path (str, optional): The path to the image file. If 'img' is provided, this parameter is ignored.
+    - width (int): The new width of the image.
+    - height (int): The new height of the image.
+
+    Returns:
+    - img (numpy.ndarray or None): The resized image array. Returns None if the image is not found or cannot be
+                                   read and resized.
+    """    
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
+        
+    img = np.resize(img, [width, height])
+    
+    return img
+
+
+def imgRotate(img : np.ndarray,
+           path : str,
+           deg90_turn : int) -> Union[np.ndarray, None]:
+    """
+    Rotate the input image array or read an image from the specified path and rotate it by 90-degree increments.
+
+    Parameters:
+    - img (numpy.ndarray, optional): The input image array. If not provided, the function will attempt to read
+      an image from the specified 'path'.
+    - path (str, optional): The path to the image file. If 'img' is provided, this parameter is ignored.
+    - deg90_turn (int): The number of 90-degree turns to rotate the image.
+
+    Returns:
+    - img (numpy.ndarray or None): The rotated image array. Returns None if the image is not found or cannot be
+                                   read and rotated.
+    """
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
+        
+    img = np.rot90(img, deg90_turn)
+    return img
+
+def imgAdd(*images: np.ndarray) -> np.ndarray:
+    """
+    Add multiple images element-wise.
+
+    Parameters:
+    - *images (numpy.ndarray): Variable-length positional arguments representing the images to be added.
+      Each image should be a NumPy array of the same shape.
+
+    Returns:
+    - add_img (numpy.ndarray): The resulting image obtained by element-wise addition of all input images.
+    """
+    add_img = np.zeros(images[0].shape)
+    for img in images:
+        add_img += img
+        
+    return add_img    
+
 def plotLogTransform(height : int = 10, 
                      width : int = 8) -> None:
     """
