@@ -90,7 +90,7 @@ def imRead(path : str,
 
     """
     img = cv2.imread(path, int(BGR))   
-    if img == None:
+    if img is None:
         print("No Image found at given Location")
         return None
     if show:
