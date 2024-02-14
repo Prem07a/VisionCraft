@@ -103,7 +103,7 @@ def weightedAvgFilter(img:np.ndarray = None,
     if show:
         plt.figure(figsize=(height, width))
         imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imShow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Weighted Avg Filter",filtered_img,subplot=True, row=2,col=1, num=2)
         plt.show()  
         
     return filtered_img
@@ -152,7 +152,7 @@ def medianFilter(img:np.ndarray = None,
     if show:
         plt.figure(figsize=(height, width))
         imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imShow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Median Filter",filtered_img,subplot=True, row=2,col=1, num=2)
         plt.show()  
         
     return filtered_img

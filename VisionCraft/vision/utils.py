@@ -94,14 +94,14 @@ def imRead(path : str,
         print("No Image found at given Location")
         return None
     if show:
-        imShow(title=path.split('/')[-1], image=img)
+        imShow(title=path.split('/')[-1], img=img)
     return img  
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-def histogramCal(img: np.ndarray,
-                 path: str,
+def histogramCal(img: np.ndarray  = None,
+                 path: str = "",
                  subplot: bool = False,
                  row: int = 0,
                  col: int = 0,
@@ -143,10 +143,10 @@ def histogramCal(img: np.ndarray,
 
 
 
-def imgResize(img : np.ndarray,
-           path : str,
-           width : int,
-           height : int) -> Union[None, np.ndarray]:
+def imgResize(img : np.ndarray = None,
+           path : str = "",
+           width : int = 10,
+           height : int = 10) -> Union[None, np.ndarray]:
     """
     Resize the input image array or read an image from the specified path and resize it.
 
@@ -171,9 +171,9 @@ def imgResize(img : np.ndarray,
     return img
 
 
-def imgRotate(img : np.ndarray,
-           path : str,
-           deg90_turn : int) -> Union[np.ndarray, None]:
+def imgRotate(img : np.ndarray = None,
+           path : str = "",
+           deg90_turn : int = 0) -> Union[np.ndarray, None]:
     """
     Rotate the input image array or read an image from the specified path and rotate it by 90-degree increments.
 
@@ -195,19 +195,23 @@ def imgRotate(img : np.ndarray,
     img = np.rot90(img, deg90_turn)
     return img
 
-def imgAdd(*images: np.ndarray) -> np.ndarray:
+def imgAdd(*images: np.ndarray, 
+           width : int, 
+           height : int) -> np.ndarray:
     """
     Add multiple images element-wise.
 
     Parameters:
     - *images (numpy.ndarray): Variable-length positional arguments representing the images to be added.
       Each image should be a NumPy array of the same shape.
-
+    - width : comman width for all images
+    - height : comman height for all images
     Returns:
     - add_img (numpy.ndarray): The resulting image obtained by element-wise addition of all input images.
     """
-    add_img = np.zeros(images[0].shape)
+    add_img = np.zeros((width, height))
     for img in images:
+        img = imgResize(img=img, width=width, height=height)
         add_img += img
         
     return add_img    

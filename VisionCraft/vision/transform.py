@@ -96,6 +96,8 @@ def bitPlaneSlicing(img : np.ndarray = None,
             return img
         
     planes = []
+    if show:
+        plt.figure(figsize=(height, width))
     for bit in range(8):
         img1 = np.copy(img)
         rows, cols = img1.shape
@@ -104,7 +106,6 @@ def bitPlaneSlicing(img : np.ndarray = None,
                 binary = bin(img1[row][col])[2:]
                 img1[row][col] = 255 if ("0"*(8-len(binary)) + binary)[::-1][bit] == "1" else 0
         if show:
-            plt.figure(figsize=(height, width))
             imShow(f"Bit Plane {bit}", img1, subplot=True, row = 2, col = 4, num=bit+1)
         planes.append(img1)
     if show:
@@ -230,7 +231,6 @@ def histogramEquilization(img : np = None,
     df["Sk"] = df["CDF"]*255
     df["New_Histogram"] = df["Sk"].apply(lambda x:round(x))
     grouped_df = df[['New_Histogram', 'Nk']].groupby('New_Histogram').sum().reset_index() 
-    freq = {}
     for row in range(img.shape[0]):
         for col in range(img.shape[1]):
             r = img[row][col]
