@@ -18,7 +18,7 @@ from typing import Union
 import matplotlib.pyplot as plt
 
 def imShow(title: str = "", 
-           image: np.ndarray = None, 
+           img: np.ndarray = None, 
            path: str = "",
            subplot: bool = False, 
            row: int = 0, 
@@ -43,30 +43,30 @@ def imShow(title: str = "",
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
 
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     try:
         if subplot:
             plt.subplot(row, col, num)
-            plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+            plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
             plt.title(title)
             plt.axis('off')
         else:
-            plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+            plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
             plt.title(title)
             plt.axis('off')
             plt.show()         
     except:
         if subplot:
             plt.subplot(row, col, num)
-            plt.imshow(image, cmap='gray')
+            plt.imshow(img, cmap='gray')
             plt.title(title)
             plt.axis('off')
         else:
-            plt.imshow(image, cmap='gray')
+            plt.imshow(img, cmap='gray')
             plt.title(title)
             plt.axis('off')
             plt.show()
@@ -96,6 +96,52 @@ def imRead(path : str,
     if show:
         imShow(title=path.split('/')[-1], image=img)
     return img  
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def histogramCal(img: np.ndarray,
+                 path: str,
+                 subplot: bool = False,
+                 row: int = 0,
+                 col: int = 0,
+                 num: int = 0) -> None:
+    """
+    Calculate the histogram of the given image and plot it.
+
+    Parameters:
+    - img (numpy.ndarray): Input image as a NumPy array.
+    - path (str): Path to the image file. Used only if `img` is None.
+    - subplot (bool): Flag indicating whether to use subplots. Default is False.
+    - row (int): Number of rows in subplot layout. Used when `subplot` is True. Default is 0.
+    - col (int): Number of columns in subplot layout. Used when `subplot` is True. Default is 0.
+    - num (int): Subplot number. Used when `subplot` is True. Default is 0.
+
+    Returns:
+    - None: The function does not return any value. If the image is not valid, it returns early.
+    ```
+    """
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
+    freq = {}
+    for r_row in range(img.shape[0]):
+        for c_col in range(img.shape[1]):
+            r = img[r_row][c_col]
+            if r in freq:
+                freq[r] += 1
+            else:
+                freq[r] = 1
+    for i in range(256):
+        if i not in freq:
+            freq[i] = 0
+    if subplot:
+        plt.subplot(row, col, num)
+    plt.bar(freq.keys(), freq.values())
+    plt.show()
+
+
 
 def imgResize(img : np.ndarray,
            path : str,

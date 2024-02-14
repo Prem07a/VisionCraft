@@ -43,10 +43,10 @@ def grayLevelSlicing(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     plt.figure(figsize=(height, width))
     rows, cols = img.shape
@@ -90,10 +90,10 @@ def bitPlaneSlicing(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     planes = []
     for bit in range(8):
@@ -143,10 +143,10 @@ def contrastStretching(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     img1 = np.copy(img)
     a = s1/r1

@@ -39,10 +39,10 @@ def boxFilter(img:np.ndarray = None,
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     - If 'filter_size' is an even number, a message is printed, recommending the use of odd numbers.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     if filter_size % 2 == 0:
         print("Please Try using Odd Numbers for filter_size to get good results")
@@ -85,10 +85,10 @@ def weightedAvgFilter(img:np.ndarray = None,
     The weighted average filter is applied to the image using a 3x3 filter kernel.
     If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     filter = np.array([[1,2,1],[2,4,2],[1,2,1]])
     
@@ -133,10 +133,10 @@ def medianFilter(img:np.ndarray = None,
     If 'filter_size' is even, a message is printed recommending odd numbers for better results.
     If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     if filter_size % 2 == 0:
         print("Please Try using Odd Numbers for filter_size to get good results")

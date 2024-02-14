@@ -37,10 +37,10 @@ def imgNegative(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     img_negative = 255 - img
     if show:
@@ -74,10 +74,10 @@ def imgLog(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     c = 255 / np.log(1 + np.max(np.array(img)))
     img_log = c * np.log(1 + np.array(img))    
@@ -113,10 +113,10 @@ def powerLaw(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     plt.figure(figsize=(height, width))
     img_pl = 255*(img/255)**gamma
@@ -149,10 +149,10 @@ def flipImg(img : np.ndarray = None,
     Note:
     - If 'path' is provided but the image is not found, a message is printed, and None is returned.
     """
-    if image is None:
-        image = imRead(path)
-        if image is None:
-            return image
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
         
     img_flip_v = img[::-1]
     img_flip_h = np.array([row[::-1] for row in img])
