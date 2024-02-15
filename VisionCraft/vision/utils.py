@@ -161,14 +161,30 @@ def imgResize(img : np.ndarray = None,
     - img (numpy.ndarray or None): The resized image array. Returns None if the image is not found or cannot be
                                    read and resized.
     """    
-    if img is None:
-        img = imRead(path)
-        if img is None:
-            return img
-        
-    img = np.resize(img, [width, height])
+           if img is None:
+               img=imRead(path)
+               if img is None:
+                   print("Error: Image is None.")
+                   return None
     
-    return img
+   
+               curr_height, curr_width = img.shape[:2]
+
+               img_resized = np.zeros((height, width, 3), dtype=np.uint8)
+
+
+               scale_x = width / curr_width
+               scale_y = height / curr_height
+
+
+               for y in range(height):
+                   for x in range(width):
+           
+                       x_original = int(x / scale_x)
+                       y_original = int(y / scale_y)
+                       img_resized[y, x] = img[y_original, x_original]
+
+    return img_resized
 
 
 def imgRotate(img : np.ndarray = None,
