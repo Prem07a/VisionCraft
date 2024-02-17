@@ -16,6 +16,8 @@ import cv2
 import numpy as np
 from typing import Union
 import matplotlib.pyplot as plt
+import os
+import re
 
 def imShow(title: str = "", 
            img: np.ndarray = None, 
@@ -287,3 +289,30 @@ def plotPowerLaw(height :int = 10,
     plt.legend(loc='best')
 
     plt.show()
+
+def getDesiredImages(img: str = '', count: int = 1, folder_path: str = r".\VisionCraft\vision\dip_Images"):
+    """Retrieve a list of file names containing a specified string in a given folder path
+    and display the images.
+
+    Parameters:
+       - img (str, optional): The string to search for in the file names. Defaults to ''.
+       - count (int, optional): The maximum number of images to display. Defaults to 1.
+       - folder_path (str, optional): The path to the folder containing the images. 
+            Defaults to r".\VisionCraft\vision\dip_Images".
+
+    Returns:
+        list: A list of file names containing the specified string.
+    """  
+    file_names = os.listdir(folder_path)
+    pattern = re.compile(rf".*{img}.*", re.IGNORECASE)
+    files = [file for file in file_names if re.match(pattern, file)]
+    loc=[]
+    if files:
+        if len(files) < count:
+            print(f"fall short by {count - len(files)}")
+        # make displaing of images optional
+        for i in range(min(count, len(files))):
+            loc.append(os.path.join(folder_path, files[i]))
+            imShow(path=os.path.join(folder_path, files[i]))
+    
+    return loc[:count]
