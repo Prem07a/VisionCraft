@@ -159,4 +159,38 @@ def medianFilter(img:np.ndarray = None,
         plt.show()  
         
     return filtered_img
+
+def minMaxFilter(img:np.ndarray = None, 
+                 path: str = "",
+                 min: bool = True, 
+                 filter_size : int = 3,
+                 show:bool = False, 
+                 height:int = 10, 
+                 width:int = 8,
+                 CONSTANT=0) -> Union[np.ndarray,None]:  
+    if img is None:
+        img = imRead(path)
+        if img is None:
+            return img
     
+    if filter_size % 2 == 0:
+        print("Please Try using Odd Numbers for filter_size to get good results")
+        
+    rows, cols = img.shape 
+    img1 = np.pad(img, pad_width=int(np.floor(filter_size/2)), mode='constant', constant_values=CONSTANT)
+    filtered_img = np.zeros_like(img)
+    for row in range(rows):
+        for col in range(cols):
+            if min:
+                replace = np.min(img1[row:row+filter_size, col:col+filter_size])
+                filtered_img[row,col]=  replace
+            else:
+                replace = np.max(img1[row:row+filter_size, col:col+filter_size])
+                filtered_img[row,col]=  replace
+    if show:
+        plt.figure(figsize=(height, width))
+        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imShow("Median Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        plt.show()  
+        
+    return filtered_img
