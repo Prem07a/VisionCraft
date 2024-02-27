@@ -23,28 +23,6 @@ VisionCraft is a Python library designed for image processing, providing a colle
 - [Author](#author)
 - [License](#license)
 
-## Directory Structure
-
-```
-VisionCraft/
-│
-├── vision/
-│   ├── __init__.py
-│   ├── filter.py
-│   ├── processing.py
-│   ├── transform.py
-│   ├── utils.py
-│
-├── craft/
-│   # Under Development
-│   ├── __init__.py
-│   
-│   
-│
-README.md
-|
-./requirements.txt
-```
 
 ## Installation
 
