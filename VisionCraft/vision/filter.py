@@ -32,7 +32,7 @@ def boxFilter(img:np.ndarray = None,
     - show (bool, optional): If True, displays the original and filtered images using Matplotlib.
     - height (int, optional): Height of the Matplotlib figure when 'show' is True.
     - width (int, optional): Width of the Matplotlib figure when 'show' is True.
-
+    - CONSTANT: Value to add in padding
     Returns:
     - np.ndarray: The filtered image as a NumPy array.
 
@@ -79,6 +79,7 @@ def weightedAvgFilter(img:np.ndarray = None,
     - show_result (bool): If True, display the original and filtered images.
     - figure_height (int): Height of the Matplotlib figure (if 'show_result' is True).
     - figure_width (int): Width of the Matplotlib figure (if 'show_result' is True).
+    - CONSTANT: Value to add in padding
 
     Returns:
     - np.ndarray: Filtered image.
@@ -127,7 +128,8 @@ def medianFilter(img:np.ndarray = None,
     - show_result (bool): If True, display the original and filtered images.
     - height (int): Height of the Matplotlib figure (if 'show_result' is True).
     - width (int): Width of the Matplotlib figure (if 'show_result' is True).
-
+    - CONSTANT: Value to add in padding
+    
     Returns:
     - np.ndarray: Filtered image.
 
@@ -162,12 +164,32 @@ def medianFilter(img:np.ndarray = None,
 
 def minMaxFilter(img:np.ndarray = None, 
                  path: str = "",
-                 min: bool = True, 
+                 minimum: bool = True, 
                  filter_size : int = 3,
                  show:bool = False, 
                  height:int = 10, 
                  width:int = 8,
                  CONSTANT=0) -> Union[np.ndarray,None]:  
+    """
+    Apply a minMax filter to the input image.
+
+    Parameters:
+    - img (np.ndarray): Input image (grayscale).
+    - path (str): Path to the input image file (if 'img' is not provided).
+    - filter_size (int): Size of the median filter (odd number recommended).
+    - show_result (bool): If True, display the original and filtered images.
+    - height (int): Height of the Matplotlib figure (if 'show_result' is True).
+    - width (int): Width of the Matplotlib figure (if 'show_result' is True).
+    - CONSTANT: Value to add in padding
+    
+    Returns:
+    - np.ndarray: Filtered image.
+
+    If 'img' is not provided and 'path' is specified, it loads the image from the path.
+    The minMax filter is applied to the image using a square neighborhood of size 'filter_size'.
+    If 'filter_size' is even, a message is printed recommending odd numbers for better results.
+    If 'show_result' is True, the original and filtered images are displayed using Matplotlib.
+    """
     if img is None:
         img = imRead(path)
         if img is None:
@@ -181,7 +203,7 @@ def minMaxFilter(img:np.ndarray = None,
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
-            if min:
+            if minimum:
                 replace = np.min(img1[row:row+filter_size, col:col+filter_size])
                 filtered_img[row,col]=  replace
             else:
@@ -190,7 +212,10 @@ def minMaxFilter(img:np.ndarray = None,
     if show:
         plt.figure(figsize=(height, width))
         imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imShow("Median Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        if minimum:
+            imShow("Min Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        else:
+            imShow("Max Filter",filtered_img,subplot=True, row=2,col=1, num=2)
         plt.show()  
         
     return filtered_img
