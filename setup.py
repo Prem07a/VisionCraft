@@ -7,7 +7,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 DESCRIPTION = 'Computer Vision Library to help do CV much faster, Added new Help Feature'
 LONG_DESCRIPTION = 'Simplifying computer vision tasks with Python. Visualize, transform, and analyze images effortlessly. Ideal for students, researchers, and developers. Enhance your computer vision projects!'
 
