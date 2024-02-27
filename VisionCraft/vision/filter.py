@@ -18,7 +18,8 @@ def boxFilter(img:np.ndarray = None,
               filter_size:int = 3, 
               show:bool = False, 
               height:int = 10, 
-              width:int = 8) -> Union[np.ndarray,None]:
+              width:int = 8,
+              CONSTANT = 255) -> Union[np.ndarray,None]:
     """
     Applies a box filter to the input image.
 
@@ -49,7 +50,7 @@ def boxFilter(img:np.ndarray = None,
     
     rows, cols = img.shape
     
-    img1 = np.pad(img, pad_width=int(np.ceil(filter_size/2)), mode='constant', constant_values=255)
+    img1 = np.pad(img, pad_width=int(np.floor(filter_size/2)), mode='constant', constant_values=CONSTANT)
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
@@ -67,7 +68,8 @@ def weightedAvgFilter(img:np.ndarray = None,
                       path: str = "", 
                       show:bool = False, 
                       height:int = 10, 
-                      width:int = 8) -> Union[np.ndarray,None]:  
+                      width:int = 8,
+                      CONSTANT=255  ) -> Union[np.ndarray,None]:  
     """
     Apply a 3x3 weighted average filter to the input image.
 
@@ -94,11 +96,11 @@ def weightedAvgFilter(img:np.ndarray = None,
     
     rows, cols = img.shape
     
-    img1 = np.pad(img, pad_width=1, mode='constant', constant_values=255)
+    img1 = np.pad(img, pad_width=1, mode='constant', constant_values=CONSTANT)
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
-            replace = np.sum(img1[row:row+3, col:col+3] * filter)/16
+            replace = np.round(np.sum(img1[row:row+3, col:col+3] * filter)/16)
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
@@ -113,7 +115,8 @@ def medianFilter(img:np.ndarray = None,
                  filter_size : int = 3,
                  show:bool = False, 
                  height:int = 10, 
-                 width:int = 8) -> Union[np.ndarray,None]:  
+                 width:int = 8,
+                 CONSTANT=255) -> Union[np.ndarray,None]:  
     """
     Apply a median filter to the input image.
 
@@ -143,7 +146,7 @@ def medianFilter(img:np.ndarray = None,
     
     rows, cols = img.shape
     
-    img1 = np.pad(img, pad_width=int(np.ceil(filter_size/2)), mode='constant', constant_values=255)
+    img1 = np.pad(img, pad_width=int(np.floor(filter_size/2)), mode='constant', constant_values=CONSTANT)
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
