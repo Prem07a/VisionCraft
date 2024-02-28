@@ -54,7 +54,7 @@ def boxFilter(img:np.ndarray = None,
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
-            replace = np.floor(np.sum(img1[row:row+filter_size, col:col+filter_size])/(filter_size*filter_size))
+            replace = np.round(np.sum(img1[row:row+filter_size, col:col+filter_size])/(filter_size*filter_size))
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
