@@ -101,18 +101,18 @@ def weightedAvgFilter(img:np.ndarray = None,
         for j in range(filter_size):
             x = i - filter_size//2
             y = j - filter_size//2
-            value = 2**-(x*x+y*y)
+            value = 2**(-(x*x+y*y)/(sigma**2))
             filter[i][j] = value
             sum_filter += value
     filter = filter/sum_filter
 
     rows, cols = img.shape
-    
-    img1 = np.pad(img, pad_width=1, mode='constant', constant_values=CONSTANT)
+    pad_width = filter_size//2
+    img1 = np.pad(img, pad_width=pad_width, mode='constant', constant_values=CONSTANT)
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
-            replace = np.round(np.sum(img1[row:row+3, col:col+3] * filter))
+            replace = np.round(np.sum(img1[row:row+filter_size, col:col+filter_size] * filter))
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
