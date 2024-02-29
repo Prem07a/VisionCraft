@@ -66,18 +66,16 @@ def boxFilter(img:np.ndarray = None,
 
 def weightedAvgFilter(img:np.ndarray = None, 
                       path: str = "", 
-                      filter_size:int = 3, 
                       show:bool = False, 
                       height:int = 10, 
                       width:int = 8,
                       CONSTANT=255  ) -> Union[np.ndarray,None]:  
     """
-    Apply a weighted average filter to the input image.
+    Apply a 3x3 weighted average filter to the input image.
 
     Parameters:
     - image (np.ndarray): Input image (grayscale).
     - image_path (str): Path to the input image file (if 'image' is not provided).
-    - filter_size (int, optional): Size of the box filter. Should be an odd number for best results.
     - show_result (bool): If True, display the original and filtered images.
     - figure_height (int): Height of the Matplotlib figure (if 'show_result' is True).
     - figure_width (int): Width of the Matplotlib figure (if 'show_result' is True).
@@ -94,25 +92,16 @@ def weightedAvgFilter(img:np.ndarray = None,
         img = imRead(path)
         if img is None:
             return img
+        
+    filter = np.array([[1,2,1],[2,4,2],[1,2,1]])
     
-    filter = np.empty((filter_size,filter_size))
-    sum_filter = 0
-    for i in range(filter_size):
-        for j in range(filter_size):
-            x = i - filter_size//2
-            y = j - filter_size//2
-            value = 2**-(x*x+y*y)
-            filter[i][j] = value
-            sum_filter += value
-    filter = filter/sum_filter
-
     rows, cols = img.shape
     
     img1 = np.pad(img, pad_width=1, mode='constant', constant_values=CONSTANT)
     filtered_img = np.zeros_like(img)
     for row in range(rows):
         for col in range(cols):
-            replace = np.round(np.sum(img1[row:row+3, col:col+3] * filter))
+            replace = np.round(np.sum(img1[row:row+3, col:col+3] * filter)/16)
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
