@@ -58,8 +58,8 @@ def boxFilter(img:np.ndarray = None,
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imShow("Box Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
+        imShow("Box Filter",filtered_img,subplot=True, row=1,col=2, num=2)
         plt.show()  
         
     return filtered_img
@@ -83,6 +83,7 @@ def weightedAvgFilter(img:np.ndarray = None,
     - figure_height (int): Height of the Matplotlib figure (if 'show_result' is True).
     - figure_width (int): Width of the Matplotlib figure (if 'show_result' is True).
     - CONSTANT: Value to add in padding
+    - Sigma: blur factor
 
     Returns:
     - np.ndarray: Filtered image.
@@ -117,8 +118,8 @@ def weightedAvgFilter(img:np.ndarray = None,
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imShow("Weighted Avg Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
+        imShow("Weighted Avg Filter",filtered_img,subplot=True, row=1,col=2, num=2)
         plt.show()  
         
     return filtered_img
@@ -168,8 +169,8 @@ def medianFilter(img:np.ndarray = None,
             filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
-        imShow("Median Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+        imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
+        imShow("Median Filter",filtered_img,subplot=True, row=1, col=2, num=2)
         plt.show()  
         
     return filtered_img
@@ -223,11 +224,11 @@ def minMaxFilter(img:np.ndarray = None,
                 filtered_img[row,col]=  replace
     if show:
         plt.figure(figsize=(height, width))
-        imShow("Original Image",img, subplot=True, row=2,col=1, num=1)
+        imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
         if minimum:
-            imShow("Min Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+            imShow("Min Filter",filtered_img,subplot=True, row=1,col=2, num=2)
         else:
-            imShow("Max Filter",filtered_img,subplot=True, row=2,col=1, num=2)
+            imShow("Max Filter",filtered_img,subplot=True, row=1,col=2, num=2)
         plt.show()  
         
     return filtered_img
