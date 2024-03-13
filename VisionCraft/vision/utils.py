@@ -228,8 +228,8 @@ def imgAdd(*images: np.ndarray,
         
     return add_img    
 
-def plotLogTransform(height : int = 10, 
-                     width : int = 8) -> None:
+def plotLogTransform(height : int = 8, 
+                     width : int = 10) -> None:
     """
     Visualize logarithmic transformations and their inverses.
 
@@ -240,7 +240,7 @@ def plotLogTransform(height : int = 10,
     Returns:
     - None
     """
-    plt.figure(figsize=(height, width))
+    plt.figure(figsize=(width, height))
     img_range = range(256)
     c = 255 / np.log(1 + np.max(np.array(img_range)))
     img_log = c * np.log(1 + np.array(img_range))
@@ -256,8 +256,8 @@ def plotLogTransform(height : int = 10,
     plt.show()
 
 
-def plotPowerLaw(height :int = 10, 
-                 width : int = 8) -> None:
+def plotPowerLaw(height :int = 8, 
+                 width : int = 10) -> None:
     """
     Visualize power-law transformations with different gamma values.
 
@@ -268,7 +268,7 @@ def plotPowerLaw(height :int = 10,
     Returns:
     - None
     """
-    plt.figure(figsize=(height, width))
+    plt.figure(figsize=(width, height))
     img_range = np.arange(256)
     gammas = [0.04, 0.1, 0.2, 0.4, 0.67, 1, 1.5, 2.5, 5, 10, 25]
 

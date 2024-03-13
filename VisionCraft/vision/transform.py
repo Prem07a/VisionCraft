@@ -20,8 +20,8 @@ def grayLevelSlicing(img : np.ndarray = None,
                      bg : bool = False, 
                      THRESHOLD : int = 256, 
                      show : bool = False, 
-                     height : int = 10, 
-                     width : int = 8,
+                     height : int = 8, 
+                     width : int = 10,
                      ) -> Union[np.ndarray,None]:
     """
     Performs gray level slicing on the input image.
@@ -48,7 +48,7 @@ def grayLevelSlicing(img : np.ndarray = None,
         if img is None:
             return img
         
-    plt.figure(figsize=(height, width))
+    plt.figure(figsize=(width, height))
     rows, cols = img.shape
     img1 = np.copy(img)
     for row in range(rows):
@@ -72,8 +72,8 @@ def grayLevelSlicing(img : np.ndarray = None,
 def bitPlaneSlicing(img : np.ndarray = None, 
                     path : str = "", 
                     show : bool = False,
-                    height : int = 10, 
-                    width : int = 8) -> Union[np.ndarray,None]:
+                    height : int = 8, 
+                    width : int = 10) -> Union[np.ndarray,None]:
     """
     Performs bit-plane slicing on the input image.
 
@@ -97,7 +97,7 @@ def bitPlaneSlicing(img : np.ndarray = None,
         
     planes = []
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
     for bit in range(8):
         img1 = np.copy(img)
         rows, cols = img1.shape
@@ -121,8 +121,8 @@ def contrastStretching(img : np.ndarray = None,
                        r2 : int = 150, 
                        L : int = 256,
                        show : bool = False,
-                       height : int = 10, 
-                       width : int = 8) -> Union[np.ndarray,None]:
+                       height : int = 8, 
+                       width : int = 10) -> Union[np.ndarray,None]:
     """
     Performs contrast stretching on the input image.
 
@@ -166,7 +166,7 @@ def contrastStretching(img : np.ndarray = None,
                 r = img[row][col]
                 img1[row][col] = g*(r-r2) + s2
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image", img, subplot=True, row = 2, col = 2, num=1)
         plt.subplot(2,2,3)
         plt.title("Original Histogram")
@@ -181,8 +181,8 @@ def contrastStretching(img : np.ndarray = None,
 def histogramEquilization(img : np = None,
                           path : str = "",
                           show : bool = False, 
-                          height : int = 10, 
-                          width : int = 8, 
+                          height : int = 8, 
+                          width : int = 10, 
                           eq_table : bool = False) -> Union[np.ndarray, None, Tuple[pd.DataFrame, np.ndarray]]:
     """
     Performs histogram equalization on the input image.
@@ -237,7 +237,7 @@ def histogramEquilization(img : np = None,
             img1[row][col] = df.loc[r,"New_Histogram"]
     
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image", img, subplot=True, row=2, col=2, num=1)
         plt.subplot(2,2,2)
         plt.bar(freq.keys(), freq.values())

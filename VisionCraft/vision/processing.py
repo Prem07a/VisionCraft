@@ -17,8 +17,8 @@ from VisionCraft.vision.utils import imShow, imRead
 def imgNegative(img : np.ndarray = None, 
                 path : str = "",
                 show : bool = False,
-                height : int = 10, 
-                width : int = 8) -> Union[np.ndarray,None]:
+                height : int = 8, 
+                width : int = 10) -> Union[np.ndarray,None]:
     """
     Creates the negative of an input image.
 
@@ -44,7 +44,7 @@ def imgNegative(img : np.ndarray = None,
         
     img_negative = 255 - img
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image", img, subplot=True, row=1, col=2, num=1)
         imShow("Image Negation",img_negative, subplot=True, row=1, col=2, num=2)
         plt.show()   
@@ -54,8 +54,8 @@ def imgNegative(img : np.ndarray = None,
 def imgLog(img : np.ndarray = None, 
            path : str = "", 
            show : bool = False,
-           height : int = 10, 
-           width : int = 8) -> Union[np.ndarray,None]:
+           height : int = 8, 
+           width : int = 10) -> Union[np.ndarray,None]:
     """
     Applies a logarithmic transformation to the input image.
 
@@ -82,7 +82,7 @@ def imgLog(img : np.ndarray = None,
     c = 255 / np.log(1 + np.max(np.array(img)))
     img_log = c * np.log(1 + np.array(img))    
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image",img, subplot=True, row=1, col=2, num=1)
         imShow("Logarithmic Transformation",img_log, subplot=True, row=1, col=2, num=2)
         plt.show()
@@ -90,8 +90,8 @@ def imgLog(img : np.ndarray = None,
         
 def powerLaw(img : np.ndarray = None, 
              path : str = "", 
-             height : int = 10, 
-             width : int = 8, 
+             height : int = 8, 
+             width : int = 10, 
              show : bool = False, 
              gamma : float = 1.0) -> Union[np.ndarray,None]:
     """
@@ -118,7 +118,7 @@ def powerLaw(img : np.ndarray = None,
         if img is None:
             return img
         
-    plt.figure(figsize=(height, width))
+    plt.figure(figsize=(width, height))
     img_pl = 255*(img/255)**gamma
     if show:
         imShow("Original Image",img, subplot=True, row=1, col=2, num=1)
@@ -129,8 +129,8 @@ def powerLaw(img : np.ndarray = None,
 def flipImg(img : np.ndarray = None, 
             path : bool = False, 
             show : bool = False,
-            height : int = 10, 
-            width : int = 8) -> Union[None, Tuple[np.ndarray, np.ndarray] ]:
+            height : int = 8, 
+            width : int = 10) -> Union[None, Tuple[np.ndarray, np.ndarray] ]:
     """
     Flips the input image vertically and horizontally.
 
@@ -157,7 +157,7 @@ def flipImg(img : np.ndarray = None,
     img_flip_v = img[::-1]
     img_flip_h = np.array([row[::-1] for row in img])
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image",img, subplot=True, row=1, col=3, num=1)           
         imShow("Vertical Flip",img_flip_v, subplot=True, row=1, col=3, num=2)
         imShow("Horizontal Flip",img_flip_h, subplot=True, row=1, col=3, num=3)

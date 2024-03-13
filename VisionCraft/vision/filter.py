@@ -17,8 +17,8 @@ def boxFilter(img:np.ndarray = None,
               path: str = "", 
               filter_size:int = 3, 
               show:bool = False, 
-              height:int = 10, 
-              width:int = 8,
+              height:int = 8, 
+              width:int = 10,
               CONSTANT = 255) -> Union[np.ndarray,None]:
     """
     Applies a box filter to the input image.
@@ -57,7 +57,7 @@ def boxFilter(img:np.ndarray = None,
             replace = np.round(np.sum(img1[row:row+filter_size, col:col+filter_size])/(filter_size*filter_size))
             filtered_img[row,col]=  replace
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
         imShow("Box Filter",filtered_img,subplot=True, row=1,col=2, num=2)
         plt.show()  
@@ -69,8 +69,8 @@ def weightedAvgFilter(img:np.ndarray = None,
                       filter_size:int = 3, 
                       sigma:int = 1, 
                       show:bool = False, 
-                      height:int = 10, 
-                      width:int = 8,
+                      height:int = 8, 
+                      width:int = 10,
                       CONSTANT=255  ) -> Union[np.ndarray,None]:  
     """
     Apply a weighted average filter to the input image.
@@ -117,7 +117,7 @@ def weightedAvgFilter(img:np.ndarray = None,
             replace = np.round(np.sum(img1[row:row+filter_size, col:col+filter_size] * filter))
             filtered_img[row,col]=  replace
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
         imShow("Weighted Avg Filter",filtered_img,subplot=True, row=1,col=2, num=2)
         plt.show()  
@@ -128,8 +128,8 @@ def medianFilter(img:np.ndarray = None,
                  path: str = "", 
                  filter_size : int = 3,
                  show:bool = False, 
-                 height:int = 10, 
-                 width:int = 8,
+                 height:int = 8, 
+                 width:int = 10,
                  CONSTANT=255) -> Union[np.ndarray,None]:  
     """
     Apply a median filter to the input image.
@@ -168,7 +168,7 @@ def medianFilter(img:np.ndarray = None,
             replace = np.median(img1[row:row+filter_size, col:col+filter_size])
             filtered_img[row,col]=  replace
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
         imShow("Median Filter",filtered_img,subplot=True, row=1, col=2, num=2)
         plt.show()  
@@ -180,8 +180,8 @@ def minMaxFilter(img:np.ndarray = None,
                  minimum: bool = True, 
                  filter_size : int = 3,
                  show:bool = False, 
-                 height:int = 10, 
-                 width:int = 8,
+                 height:int = 8, 
+                 width:int = 10,
                  CONSTANT=0) -> Union[np.ndarray,None]:  
     """
     Apply a minMax filter to the input image.
@@ -223,7 +223,7 @@ def minMaxFilter(img:np.ndarray = None,
                 replace = np.max(img1[row:row+filter_size, col:col+filter_size])
                 filtered_img[row,col]=  replace
     if show:
-        plt.figure(figsize=(height, width))
+        plt.figure(figsize=(width, height))
         imShow("Original Image",img, subplot=True, row=1,col=2, num=1)
         if minimum:
             imShow("Min Filter",filtered_img,subplot=True, row=1,col=2, num=2)
